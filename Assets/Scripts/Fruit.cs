@@ -111,7 +111,7 @@ public class Fruit : Clickable
     /// </summary>
     public void OnMouseDown()
     {
-        if (!_burning && GameController.Instance.GameRunning)
+        if (!_burning && !_beingCollected && GameController.Instance.GameRunning)
         {
             _beingCollected = true;
             _collider.isTrigger = true;
@@ -138,9 +138,12 @@ public class Fruit : Clickable
 
     private void Burn()
     {
-        _burning = true;
-        _startedBurningAt = Time.time;
-        _startToFlickerAt = Time.time + BurnDuration;
-        _destructAt = _startToFlickerAt + FlickerDuration;
+        if (!_burning && !_beingCollected)
+        {
+            _burning = true;
+            _startedBurningAt = Time.time;
+            _startToFlickerAt = Time.time + BurnDuration;
+            _destructAt = _startToFlickerAt + FlickerDuration;
+        }
     }
 }

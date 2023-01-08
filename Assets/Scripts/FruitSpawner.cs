@@ -26,16 +26,21 @@ public class FruitSpawner : MonoBehaviour
         Instance = this;
 
         Active = false;
-        FrameSpawnProbability = 0.01f;
+        FrameSpawnProbability = 2.25f;
     }
 
     private void Update()
     {
-        if (Active && _nextSpawnFrom <= Time.time && (Time.time > _nextSpawnFrom + MaxDelay || Random.value < FrameSpawnProbability))
+        if (Active && _nextSpawnFrom <= Time.time && (Time.time > _nextSpawnFrom + MaxDelay || Random.value < FrameSpawnProbability * Time.deltaTime))
         {
             Fruit fruit = Instantiate(Fruit, new Vector3(Random.Range(MinSpawnX, MaxSpawnX), SpawnY, 0), Quaternion.identity);
             fruit.transform.parent = transform;
             _nextSpawnFrom = Time.time + MinDelay;
         }
+    }
+
+    public void ResetFrameSpawnProbability()
+    {
+        FrameSpawnProbability = 2.25f;
     }
 }

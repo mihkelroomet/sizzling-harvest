@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
                 IncreaseFruitSpawnFrequency();
             }
 
-            if (_secondSpeedIncreaseDone && TimeLeft < RoundTime / 3)
+            if (!_secondSpeedIncreaseDone && TimeLeft < RoundTime / 3)
             {
                 _secondSpeedIncreaseDone = true;
                 IncreaseFruitSpawnFrequency();
@@ -85,13 +85,14 @@ public class GameController : MonoBehaviour
 
     void IncreaseFruitSpawnFrequency()
     {
-        FruitSpawner.Instance.FrameSpawnProbability *= 3;
-        FruitSpawner.Instance.MinDelay *= 0.6f;
+        FruitSpawner.Instance.FrameSpawnProbability *= 2.4f;
+        FruitSpawner.Instance.MinDelay *= 0.7f;
     }
 
     void StartGame()
     {
         FruitSpawner.Instance.Active = true;
+        FruitSpawner.Instance.ResetFrameSpawnProbability();
         HUD.gameObject.SetActive(true);
         GameRunning = true;
         Events.SetScore(0);

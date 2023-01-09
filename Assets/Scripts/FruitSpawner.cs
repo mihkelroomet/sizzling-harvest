@@ -26,7 +26,7 @@ public class FruitSpawner : MonoBehaviour
         Instance = this;
 
         Active = false;
-        FrameSpawnProbability = 2.25f;
+        FrameSpawnProbability = 2.35f;
     }
 
     private void Update()
@@ -39,8 +39,9 @@ public class FruitSpawner : MonoBehaviour
         }
     }
 
-    public void ResetFrameSpawnProbability()
+    public void ResetParameters()
     {
-        FrameSpawnProbability = 2.25f;
+        FrameSpawnProbability = 2.35f;
+        MinDelay = 0.5f;
     }
 }

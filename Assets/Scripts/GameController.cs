@@ -34,8 +34,6 @@ public class GameController : MonoBehaviour
         Instance = this;
 
         _seenIntroDialogue = false;
-        _firstSpeedIncreaseDone = false;
-        _secondSpeedIncreaseDone = false;
         IntroDialoguePanel.SetActive(false);
         WinDialoguePanel.SetActive(false);
         LossDialoguePanel.SetActive(false);
@@ -85,14 +83,16 @@ public class GameController : MonoBehaviour
 
     void IncreaseFruitSpawnFrequency()
     {
-        FruitSpawner.Instance.FrameSpawnProbability *= 2.4f;
+        FruitSpawner.Instance.FrameSpawnProbability *= 2.5f;
         FruitSpawner.Instance.MinDelay *= 0.7f;
     }
 
     void StartGame()
     {
+        _firstSpeedIncreaseDone = false;
+        _secondSpeedIncreaseDone = false;
         FruitSpawner.Instance.Active = true;
-        FruitSpawner.Instance.ResetFrameSpawnProbability();
+        FruitSpawner.Instance.ResetParameters();
         HUD.gameObject.SetActive(true);
         GameRunning = true;
         Events.SetScore(0);
